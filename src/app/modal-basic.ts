@@ -31,7 +31,6 @@ export class NgbdModalBasic {
   }
 
   open(content: string) {
-    debugger;
     this.modalService.open(content).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
