@@ -1,27 +1,59 @@
-import { Component } from '@angular/core';
-import { DatePicker, PopupObjectArgs } from '@syncfusion/ej2-ng-calendars'; 
+
+import { Component, NgModule, ViewChild } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { JsonpModule } from '@angular/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DatePickerModule } from '@syncfusion/ej2-ng-calendars';
+import { NgbdModalBasic } from './modal-basic';
+import { DatePickerComponent } from '@syncfusion/ej2-ng-calendars';
+import { loadCldr, L10n } from '@syncfusion/ej2-base';
 
 @Component({
-    selector: 'app-container',
-    template: `<ej-datepicker id="datepick" (open)="onOpen($event)" (close)="onClose($event)"></ej-datepicker>`
+  selector: 'my-app',
+  template: `
+    <div class="container-fluid">
+    
+    <hr>
+    <p>
+      This demo plnkr explains ng-modal dialog with Syncfusion Calendar component.
+    </p>
+    <hr>
+
+    <ngbd-modal-basic></ngbd-modal-basic>
+  </div>
+  `
 })
 export class AppComponent {
-    constructor() { 
-    }
-    onOpen(args: any) {
-      document.querySelector('#overlay').classList.add('modal-backdrop', 'fade', 'in');
-      let elements: Element[] = <NodeListOf<Element> & Element[]>document.querySelectorAll('body > *');
-      let value: string[] =[];
-      for (let i = 0; i < elements.length; i++) {
-          var element = document.defaultView.getComputedStyle(elements[i], null);
-          if (element.getPropertyValue('position') !== 'static') {
-              value.push(element.getPropertyValue('z-index') || element.getPropertyValue('zIndex'));// fetching z-index values 
-          }
-      }
-      let index: string = Math.max.apply(Math, value);// fetching maximum z-index value
-      args.popupElement.element.style.zIndex = index + 1; // setting z-index of calendar
-      } 
-     onClose(args: any) {
-       document.querySelector('#overlay').classList.remove('modal-backdrop', 'fade', 'in');
-     }
-}
+   @ViewChild('ejDatePicker') ejDatePicker: DatePickerComponent;
+   ngOnInit(): void {
+    /*loads the localization text*/
+    L10n.load({
+        'de': {
+            'datepicker': {
+                placeholder: 'Wählen Sie ein Datum'
+            }
+        },
+        'en': {
+            'datepicker': {
+                placeholder: 'Choose a date'
+            }
+        },
+        'ar': {
+            'datepicker': {
+                placeholder: 'اختر تاريخا'
+            }
+        }
+    });
+    
+    /*  loadCldr method to load the culture specific JSON file.*/
+    loadCldr(
+        require('../../node_modules/cldr-data/main/de/ca-gregorian.json'),
+        require('../../node_modules/cldr-data/main/de/numbers.json'),
+        require('../../node_modules/cldr-data/main/de/timeZoneNames.json')
+    );
+        
+   }
+}   
+
+

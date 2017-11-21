@@ -3,11 +3,15 @@
  * Adjust as necessary for your application needs.
  */
 (function (global) {
+  var ver = {
+    ng: '4.0.3'
+  };
   System.config({
     paths: {
       // paths serve as alias
       'npm:': 'node_modules/',
       "syncfusion:": "node_modules/@syncfusion/",
+      'pkg:': 'https://unpkg.com/',
     },
     // map tells the System loader where to look for things
     map: {
@@ -23,8 +27,9 @@
       '@angular/http': 'npm:@angular/http/bundles/http.umd.js',
       '@angular/router': 'npm:@angular/router/bundles/router.umd.js',
       '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
-	  
-	  "@syncfusion/ej2-base": "syncfusion:ej2-base/dist/ej2-base.umd.min.js",
+      'typescript': 'npm:typescript@2.1.5/lib/typescript.js',
+
+      "@syncfusion/ej2-base": "syncfusion:ej2-base/dist/ej2-base.umd.min.js",
       "@syncfusion/ej2-data": "syncfusion:ej2-data/dist/ej2-data.umd.min.js",
       "@syncfusion/ej2-inputs": "syncfusion:ej2-inputs/dist/ej2-inputs.umd.min.js",
       "@syncfusion/ej2-popups": "syncfusion:ej2-popups/dist/ej2-popups.umd.min.js",
@@ -33,10 +38,16 @@
       "@syncfusion/ej2-calendars": "syncfusion:ej2-calendars/dist/ej2-calendars.umd.min.js",
       "@syncfusion/ej2-ng-base": "syncfusion:ej2-ng-base/dist/ej2-ng-base.umd.min.js",
       "@syncfusion/ej2-ng-calendars": "syncfusion:ej2-ng-calendars/dist/ej2-ng-calendars.umd.min.js",
+      '@ng-bootstrap/ng-bootstrap': 'npm:@ng-bootstrap/ng-bootstrap/bundles/ng-bootstrap.js',
 
       // other libraries
-      'rxjs':                      'npm:rxjs',
-      'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js'
+      'rxjs': 'npm:rxjs',
+      'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
+      "cldr-data": 'npm:cldr-data',
+      "plugin-json": "npm:systemjs-plugin-json/json.js"
+    },
+    meta: {
+        '*.json': { loader: 'plugin-json' }
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -50,7 +61,9 @@
       },
       rxjs: {
         defaultExtension: 'js'
-      }
+      },
+      'app': { main: 'app', defaultExtension: 'js' },
+      'cldr-data': { main: 'index.js', defaultExtension: 'js' }
     }
   });
 })(this);

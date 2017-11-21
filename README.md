@@ -1,6 +1,6 @@
-# Calendar
+# DatePicker component with ng-bootstrap modal dialog
 
-## Install the npm packages
+## Install the necessary packages
 
 ```shell
 npm install
