@@ -10,8 +10,7 @@
     paths: {
       // paths serve as alias
       'npm:': 'node_modules/',
-      "syncfusion:": "node_modules/@syncfusion/",
-      'pkg:': 'https://unpkg.com/',
+      "syncfusion:": "node_modules/@syncfusion/"
     },
     // map tells the System loader where to look for things
     map: {
